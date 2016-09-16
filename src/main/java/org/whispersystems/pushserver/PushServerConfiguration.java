@@ -25,12 +25,10 @@ public class PushServerConfiguration extends Configuration {
 
   @JsonProperty
   @Valid
-  @NotNull
   private ApnConfiguration apn;
 
   @JsonProperty
   @Valid
-  @NotNull
   private GcmConfiguration gcm;
   
   public AuthenticationConfiguration getAuthenticationConfiguration() {

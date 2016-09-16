@@ -1,6 +1,8 @@
 package org.whispersystems.pushserver.controllers;
 
 import com.codahale.metrics.annotation.Timed;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.whispersystems.pushserver.auth.Server;
 import org.whispersystems.pushserver.entities.ApnMessage;
 import org.whispersystems.pushserver.entities.GcmMessage;
@@ -21,6 +23,7 @@ public class PushController {
 
   private final APNSender apnSender;
   private final GCMSender gcmSender;
+  private final Logger logger = LoggerFactory.getLogger(PushController.class);
 
   public PushController(APNSender apnSender, GCMSender gcmSender) {
     this.apnSender = apnSender;
@@ -32,6 +35,10 @@ public class PushController {
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/gcm")
   public void sendGcmPush(@Auth Server server, @Valid GcmMessage gcmMessage) {
+    if (gcmSender == null) {
+      logger.warn("GCM API request ignored due to missing GCM config");
+      return;
+    }
     gcmSender.sendMessage(gcmMessage);
   }
 
@@ -40,8 +47,12 @@ public class PushController {
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/apn")
   public void sendApnPush(@Auth Server server, @Valid ApnMessage apnMessage)
-      throws TransientPushFailureException
-  {
+      throws TransientPushFailureException {
+    logger.warn("APN API request ignored due to missing GCM config");
+    if (apnSender == null) {
+      logger.warn("APN API request ignored due to missing GCM config");
+      return;
+    }
     apnSender.sendMessage(apnMessage);
   }
 

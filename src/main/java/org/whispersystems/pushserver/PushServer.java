@@ -51,12 +51,26 @@ public class PushServer extends Application<PushServerConfiguration> {
     List<Server>        servers             = config.getAuthenticationConfiguration().getServers();
     UnregisteredQueue   apnQueue            = new UnregisteredQueue(redisClient, environment.getObjectMapper(), servers, "apn");
     UnregisteredQueue   gcmQueue            = new UnregisteredQueue(redisClient, environment.getObjectMapper(), servers, "gcm");
+    ApnConfiguration    apnConfig           = config.getApnConfiguration();
+    GcmConfiguration    gcmConfig           = config.getGcmConfiguration();
+    APNSender           apnSender           = null;
+    GCMSender           gcmSender           = null;
 
-    APNSender apnSender = initializeApnSender(redisClient, apnQueue, config.getApnConfiguration());
-    GCMSender gcmSender = initializeGcmSender(gcmQueue, config.getGcmConfiguration());
-
-    environment.lifecycle().manage(apnSender);
-    environment.lifecycle().manage(gcmSender);
+    if (apnConfig == null && gcmConfig == null) {
+      throw new RuntimeException("APN and GCM config missing; At least 1 is required.");
+    }
+    if (apnConfig != null) {
+      apnSender = initializeApnSender(redisClient, apnQueue, apnConfig);
+      environment.lifecycle().manage(apnSender);
+    } else {
+      logger.warn("No Apple Push Notification (APN) configuration found");
+    }
+    if (gcmConfig != null) {
+      gcmSender = initializeGcmSender(gcmQueue, gcmConfig);
+      environment.lifecycle().manage(gcmSender);
+    } else {
+      logger.warn("No Google Cloud Messaging (GCM) configuration found");
+    }
 
     environment.jersey().register(AuthFactory.binder(new BasicAuthFactory<>(serverAuthenticator, "PushServer", Server.class)));
     environment.jersey().register(new PushController(apnSender, gcmSender));
