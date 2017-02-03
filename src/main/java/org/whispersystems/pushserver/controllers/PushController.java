@@ -48,9 +48,8 @@ public class PushController {
   @Path("/apn")
   public void sendApnPush(@Auth Server server, @Valid ApnMessage apnMessage)
       throws TransientPushFailureException {
-    logger.warn("APN API request ignored due to missing GCM config");
     if (apnSender == null) {
-      logger.warn("APN API request ignored due to missing GCM config");
+      logger.warn("APN API request ignored due to missing APN config");
       return;
     }
     apnSender.sendMessage(apnMessage);

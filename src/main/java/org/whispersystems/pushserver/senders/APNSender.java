@@ -32,6 +32,7 @@ import org.whispersystems.pushserver.util.Constants;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.KeyPair;
@@ -111,11 +112,11 @@ public class APNSender implements Managed {
   private static byte[] initializeKeyStore(String pemCertificate, String pemKey)
       throws KeyStoreException, CertificateException, NoSuchAlgorithmException, IOException
   {
-    PEMReader       reader           = new PEMReader(new InputStreamReader(new ByteArrayInputStream(pemCertificate.getBytes())));
+    PEMReader       reader           = new PEMReader(new InputStreamReader(new FileInputStream(pemCertificate)));
     X509Certificate certificate      = (X509Certificate) reader.readObject();
     Certificate[]   certificateChain = {certificate};
 
-    reader = new PEMReader(new InputStreamReader(new ByteArrayInputStream(pemKey.getBytes())));
+    reader = new PEMReader(new InputStreamReader(new FileInputStream(pemKey)));
     KeyPair keyPair = (KeyPair) reader.readObject();
 
     KeyStore keyStore = KeyStore.getInstance("pkcs12");
