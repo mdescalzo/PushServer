@@ -60,4 +60,20 @@ public class ApnConfiguration {
   public boolean isFeedbackEnabled() {
     return feedback;
   }
+
+  public ApnConfiguration() {
+
+  }
+
+  public ApnConfiguration(
+    String  pemCertificate,
+    String  pemKey,
+    boolean feedback)
+  {
+    this.voipKey         = pemKey;
+    this.pushKey         = pemKey;
+    this.voipCertificate = pemCertificate;
+    this.pushCertificate = pemCertificate;
+    this.feedback        = feedback;
+  }
 }
