@@ -79,7 +79,7 @@ public class ForstaConfiguration {
      */
     public static RedisConfiguration getRedisConfiguration() {
 
-        String url = System.getenv("REDIS_CLIENTURL");
+        String url = System.getenv("REDIS_URL");
 
         return new RedisConfiguration(url);
     }
