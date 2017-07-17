@@ -1,0 +1,48 @@
+{
+  "name": "PushServer",
+  "description": "Deployment file",
+  "scripts": {
+  },
+  "env": {
+    "APN_CERT": {
+      "required": true
+    },
+    "APN_FEEDBACK": {
+      "required": true
+    },
+    "APN_KEY": {
+      "required": true
+    },
+    "AUTH_SERVER_PASSWORD": {
+      "required": true
+    },
+    "AUTH_SERVER_USERNAME": {
+      "required": true
+    },
+    "GCM_APIKEY": {
+      "required": true
+    },
+    "GCM_REDPHONEAPIKEY": {
+      "required": true
+    },
+    "GCM_SENDERID": {
+      "required": true
+    },
+    "GCM_XMPP": {
+      "required": true
+    },
+    "REDIS_URL": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "heroku-redis"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/java"
+    }
+  ]
+}
