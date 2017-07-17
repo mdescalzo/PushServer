@@ -23,10 +23,10 @@ apn:
 server:
     applicationConnectors:
     - type: https
-      port: 9090
+      port: 443
     adminConnectors:
     - type: https
-      port: 9091
+      port: 443
     gzip:
         enabled: true
 
