@@ -20,15 +20,15 @@ apn:
   voipCertificate: /path/pcert.pem #heroku
   pushCertificate: /path/pcert.pem #heroku
 
-server:
-    applicationConnectors:
-    - type: http
-      port: 9090
-    adminConnectors:
-    - type: http
-      port: 9091
-    gzip:
-        enabled: true
+#server:
+#    applicationConnectors:
+#    - type: http
+#      port: 9090
+#    adminConnectors:
+#    - type: http
+#      port: 9091
+#    gzip:
+#        enabled: true
 
 logging:
   level: INFO
