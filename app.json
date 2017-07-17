@@ -33,9 +33,6 @@
     },
     "REDIS_URL": {
       "required": true
-    },
-    "REDIS_CLIENTURL": {
-      "required": true
     }
   },
   "formation": {
