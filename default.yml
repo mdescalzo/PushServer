@@ -23,10 +23,10 @@ apn:
 server:
     applicationConnectors:
     - type: https
-      port: 
+      port: $PORT
     adminConnectors:
     - type: https
-      port: 
+      port: $PORT
     gzip:
         enabled: true
 
