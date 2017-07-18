@@ -35,8 +35,8 @@ server:
 #    adminConnectors:
 #    - type: http
 #      port: 8081
-     gzip:
-        enabled: true
+#     gzip:
+#        enabled: true
 
 logging:
   level: INFO
