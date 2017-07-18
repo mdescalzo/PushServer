@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/Push-Server-0.12.0-capsule-fat.jar server default.yml
+web: java -Dserver.port=$PORT -jar target/Push-Server-0.12.0-capsule-fat.jar server default.yml
