@@ -60,8 +60,8 @@ public class PushServer extends Application<PushServerConfiguration> {
       throw new RuntimeException("APN and GCM config missing; At least 1 is required.");
     }
     if (apnConfig != null) {
-      //apnSender = initializeApnSender(redisClient, apnQueue, apnConfig);
-      //environment.lifecycle().manage(apnSender);
+      pnSender = initializeApnSender(redisClient, apnQueue, apnConfig);
+      environment.lifecycle().manage(apnSender);
     } else {
       logger.warn("No Apple Push Notification (APN) configuration found");
     }
@@ -73,7 +73,7 @@ public class PushServer extends Application<PushServerConfiguration> {
     }
 
     environment.jersey().register(AuthFactory.binder(new BasicAuthFactory<>(serverAuthenticator, "PushServer", Server.class)));
-    environment.jersey().register(new PushController(null, gcmSender));
+    environment.jersey().register(new PushController(apnSender, gcmSender));
     environment.jersey().register(new FeedbackController(gcmQueue, apnQueue));
 
     environment.healthChecks().register("Redis", new RedisHealthCheck(redisClient));
