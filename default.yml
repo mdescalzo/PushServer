@@ -20,24 +20,24 @@ apn:
   voipCertificate: /path/pcert.pem #heroku
   pushCertificate: /path/pcert.pem #heroku
 
+#server:
+#  type: simple
+#  applicationContextPath: /
+#  adminContextPath: /admin
+#  connector:
+#    type: http
+#    port: 8080
+
 server:
     applicationConnectors:
     - type: http
-      port: 80
-#    - type: https
-#      port: 443
-#      keyStorePath: key.keystore
-#      keyStorePassword: password
-#    adminConnectors:
-#    - type: http
-#      port: 80
-#    - type: https
-#      port: 443
-#      keyStorePath: key.keystore
-#      keyStorePassword: password
-#      validateCerts: false
-#    gzip:
-#        enabled: true
+      port: 8080
+    adminConnectors:
+    - type: http
+      port: 8081
+      validateCerts: false
+    gzip:
+        enabled: true
 
 logging:
   level: INFO

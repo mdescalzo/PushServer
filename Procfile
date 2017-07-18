@@ -1,1 +1,1 @@
-web: java -Ddw.server.applicationConnectors.port=$PORT -jar target/Push-Server-0.12.0-capsule-fat.jar server default.yml
+web: java -Ddw.server.applicationConnectors[0].port='$PORT' -Ddw.server.adminConnectors[0].port='$PORT' -jar target/Push-Server-0.12.0-capsule-fat.jar server default.yml
