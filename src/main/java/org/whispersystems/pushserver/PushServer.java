@@ -60,7 +60,7 @@ public class PushServer extends Application<PushServerConfiguration> {
       throw new RuntimeException("APN and GCM config missing; At least 1 is required.");
     }
     if (apnConfig != null) {
-      pnSender = initializeApnSender(redisClient, apnQueue, apnConfig);
+      apnSender = initializeApnSender(redisClient, apnQueue, apnConfig);
       environment.lifecycle().manage(apnSender);
     } else {
       logger.warn("No Apple Push Notification (APN) configuration found");
