@@ -35,7 +35,6 @@ server:
     adminConnectors:
     - type: http
       port: 8081
-      validateCerts: false
     gzip:
         enabled: true
 
