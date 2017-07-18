@@ -20,10 +20,10 @@ apn:
   voipCertificate: /path/pcert.pem #heroku
   pushCertificate: /path/pcert.pem #heroku
 
-#server:
-#    applicationConnectors:
-#    - type: http
-#      port: 80
+server:
+    applicationConnectors:
+    - type: http
+      port: 80
 #    - type: https
 #      port: 443
 #      keyStorePath: key.keystore
