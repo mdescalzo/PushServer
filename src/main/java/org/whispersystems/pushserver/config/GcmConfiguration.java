@@ -53,4 +53,20 @@ public class GcmConfiguration {
   public String getRedphoneApiKey() {
     return redphoneApiKey;
   }
+
+  public GcmConfiguration()
+  {
+  }
+
+  public GcmConfiguration(
+    String  apiKey,
+    long    senderId,
+    boolean xmpp,
+    String  redphoneApiKey)
+  {
+	  this.apiKey         = apiKey;
+	  this.senderId       = senderId;
+	  this.xmpp           = xmpp;
+	  this.redphoneApiKey = redphoneApiKey;
+  }
 }

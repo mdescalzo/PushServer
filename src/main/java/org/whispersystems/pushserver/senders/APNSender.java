@@ -47,6 +47,7 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.Base64;
 
 import static com.codahale.metrics.MetricRegistry.name;
 import io.dropwizard.lifecycle.Managed;
@@ -112,11 +113,13 @@ public class APNSender implements Managed {
   private static byte[] initializeKeyStore(String pemCertificate, String pemKey)
       throws KeyStoreException, CertificateException, NoSuchAlgorithmException, IOException
   {
-    PEMReader       reader           = new PEMReader(new InputStreamReader(new FileInputStream(pemCertificate)));
+    PEMReader reader = getPemReader(pemCertificate);
+
     X509Certificate certificate      = (X509Certificate) reader.readObject();
     Certificate[]   certificateChain = {certificate};
 
-    reader = new PEMReader(new InputStreamReader(new FileInputStream(pemKey)));
+    reader = getPemReader(pemKey);
+
     KeyPair keyPair = (KeyPair) reader.readObject();
 
     KeyStore keyStore = KeyStore.getInstance("pkcs12");
@@ -155,6 +158,15 @@ public class APNSender implements Managed {
   public void stop() throws Exception {
     pushApnService.stop();
     voipApnService.stop();
+  }
+  
+  private static PEMReader getPemReader(String pemBase64Encoded) {
+
+      byte[] bytes = pemBase64Encoded.getBytes();
+
+      bytes = Base64.getDecoder().decode(bytes);
+
+      return new PEMReader(new InputStreamReader(new ByteArrayInputStream(bytes)));
   }
 
   private void redisSet(String registrationId, String number, int deviceId) {

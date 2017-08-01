@@ -1,0 +1,40 @@
+redis:
+  url: default #heroku
+
+authentication:
+  servers:
+    -
+      name: default      # heroku
+      password: default  # heroku
+
+gcm:
+  xmpp: false             #heroku
+  apiKey: default         #heroku
+  senderId: 0             #heroku
+  redphoneApiKey: default #heroku
+
+apn:
+  feedback: false
+  pushKey: /path/key.pem           #heroku
+  voipKey: /path/key.pem           #heroku
+  voipCertificate: /path/pcert.pem #heroku
+  pushCertificate: /path/pcert.pem #heroku
+
+server:
+    applicationConnectors:
+    - type: http
+      port: 8080
+#    adminConnectors:
+#    - type: http
+#      port: 8081
+#     gzip:
+#        enabled: true
+
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      currentLogFilename: /tmp/pushserver.log
+      archivedLogFilenamePattern: /tmp/pushserver-%d.log.gz
+      archivedFileCount: 5
+    - type: console

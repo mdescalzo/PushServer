@@ -32,18 +32,22 @@ public class PushServerConfiguration extends Configuration {
   private GcmConfiguration gcm;
   
   public AuthenticationConfiguration getAuthenticationConfiguration() {
-    return authentication;
-  }
 
-  public RedisConfiguration getRedisConfiguration() {
-    return redis;
-  }
-
-  public ApnConfiguration getApnConfiguration() {
-    return apn;
+    return ForstaConfiguration.getAuthenticationConfiguration();
   }
 
   public GcmConfiguration getGcmConfiguration() {
-    return gcm;
+
+    return ForstaConfiguration.getGcmConfiguration();
+  }
+
+  public ApnConfiguration getApnConfiguration() {
+	  
+    return ForstaConfiguration.getApnConfiguration();
+  }
+
+  public RedisConfiguration getRedisConfiguration() {
+
+    return ForstaConfiguration.getRedisConfiguration();
   }
 }

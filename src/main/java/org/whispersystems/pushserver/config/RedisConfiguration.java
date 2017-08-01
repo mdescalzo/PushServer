@@ -29,4 +29,14 @@ public class RedisConfiguration {
   public String getUrl() {
     return url;
   }
+
+  public RedisConfiguration() {
+
+  }
+
+  public RedisConfiguration(
+    String url)
+  {
+    this.url = url;
+  }
 }
