@@ -66,8 +66,10 @@ public class ForstaConfiguration {
         String pemKey         = System.getenv("APN_KEY");
         String pemCertificate = System.getenv("APN_CERT");
         String feedback       = System.getenv("APN_FEEDBACK");
+        String pemKeyVOIP     = System.getenv("APN_VOIP_KEY");
+        String pemCertVOIP    = System.getenv("APN_VOIP_CERT");
 
-        return new ApnConfiguration(pemCertificate, pemKey, Boolean.parseBoolean(feedback));
+        return new ApnConfiguration(pemCertVOIP, pemKeyVOIP, pemCertificate, pemKey, Boolean.parseBoolean(feedback));
     }
 
     /**

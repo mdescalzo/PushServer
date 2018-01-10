@@ -66,13 +66,15 @@ public class ApnConfiguration {
   }
 
   public ApnConfiguration(
+    String  pemVOIPCertificate,
+    String  pemVOIPKey,
     String  pemCertificate,
     String  pemKey,
     boolean feedback)
   {
-    this.voipKey         = pemKey;
+    this.voipKey         = pemVOIPKey;
     this.pushKey         = pemKey;
-    this.voipCertificate = pemCertificate;
+    this.voipCertificate = pemVOIPCertificate;
     this.pushCertificate = pemCertificate;
     this.feedback        = feedback;
   }
